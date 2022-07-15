@@ -10,7 +10,7 @@ const LeftNavBar = () => {
             id="sidebar"
         >
             <div className="offcanvas-body p-0">
-                <nav className={styles.navbar}>
+                <nav className="navbar-dark">
                     <ul className="navbar-nav">
                         <li>
                             <Link href="/people">
