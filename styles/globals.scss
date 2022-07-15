@@ -1,9 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+@import 'variables';
+@import 'common';
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: $font-family-base;
 }
 
 a {
@@ -13,4 +17,23 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+button {
+  font-family: $font-family-base;
+}
+
+@include media-breakpoint-up(lg) {
+  body {
+    overflow: auto !important;
+  }
+  main {
+    margin-left: $offcanvas-width;
+  }
+
+  .offcanvas {
+    &-backdrop::before {
+      display: none;
+    }
+  }
 }
