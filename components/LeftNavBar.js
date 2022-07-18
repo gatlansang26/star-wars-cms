@@ -1,52 +1,69 @@
 import React from 'react';
-import Link from 'next/link'
-import styles from '../styles/LeftNavBar.module.scss';
+import Divider from '@mui/material/Divider';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Toolbar from '@mui/material/Toolbar';
+import NextLink from 'next/link'
+import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
+import LanguageIcon from '@mui/icons-material/Language';
+import EmojiNatureIcon from '@mui/icons-material/EmojiNature';
+import BadgeIcon from '@mui/icons-material/Badge';
+import Typography from '@mui/material/Typography';
+import {Button} from '@mui/material';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 
-const LeftNavBar = () => {
+const menu = [
+    {
+        text: 'People',
+        icon: (<BadgeIcon />),
+        href: '/people',
+    },
+    {
+        text: 'Vehicles',
+        icon: (<RocketLaunchIcon />),
+        href: '/vehicles'
+    },
+    {
+        text: 'Species',
+        icon: (<EmojiNatureIcon />),
+        href: '/species'
+    },
+    {
+        text: 'Planets',
+        icon: (<LanguageIcon />),
+        href: '/planets'
+    }
+];
+
+
+const LeftNavBar = ({ handleNavClick }) => {
     return (
-        <div
-            className={'offcanvas offcanvas-start bg-dark ' + styles.sidebar__nav }
-            tabIndex="-1"
-            id="sidebar"
-        >
-            <div className="offcanvas-body p-0">
-                <nav className="navbar-dark">
-                    <ul className="navbar-nav">
-                        <li>
-                            <Link href="/people">
-                                <a className="nav-link px-3 py-3">
-                                    <span className="me-2"><i className="bi bi-person-badge"></i></span>
-                                    <span>People</span>
-                                </a>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/vehicles">
-                                <a className="nav-link px-3 py-3">
-                                    <span className="me-2"><i className="bi bi-airplane-fill"></i></span>
-                                    <span>Vehicles</span>
-                                </a>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/species">
-                                <a className="nav-link px-3 py-3">
-                                    <span className="me-2"><i className="bi bi-bug-fill"></i></span>
-                                    <span>Species</span>
-                                </a>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/planets">
-                                <a className="nav-link px-3 py-3">
-                                    <span className="me-2"><i className="bi bi-globe2"></i></span>
-                                    <span>Planets</span>
-                                </a>
-                            </Link>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+        <div>
+            <Toolbar>
+                <NextLink href="/people" passHref>
+                    <Button variant="text" component="a" disableRipple startIcon={<AutoAwesomeIcon />}>
+                        <Typography variant="h6" noWrap component="div">
+                            Space Portal
+                        </Typography>
+                    </Button>
+                </NextLink>
+            </Toolbar>
+            <Divider />
+            <List>
+                {menu.map((obj) => (
+                    <ListItem key={obj.text} disablePadding>
+                        <NextLink href={obj.href} passHref>
+                            <ListItemButton component="a" onClick={handleNavClick(obj.text)}>
+                                <ListItemIcon>{obj.icon}</ListItemIcon>
+                                <ListItemText primary={obj.text} />
+                            </ListItemButton>
+                        </NextLink>
+                    </ListItem>
+                ))}
+            </List>
         </div>
     );
 };
