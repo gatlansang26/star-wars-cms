@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from "next/head";
 import PeopleList from '../components/people/PeopleList';
 
 export const getServerSideProps = async () => {
@@ -14,12 +13,7 @@ export const getServerSideProps = async () => {
 
 const People = ({ data }) => {
     return (
-        <>
-            <Head>
-                <title>People | Star Wars Dashboard</title>
-            </Head>
-            <PeopleList data={data} />
-        </>
+        <PeopleList data={data} />
     );
 };
 

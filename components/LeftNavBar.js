@@ -39,7 +39,7 @@ const menu = [
 ];
 
 
-const LeftNavBar = ({ handleNavClick }) => {
+const LeftNavBar = () => {
     return (
         <div>
             <Toolbar>
@@ -56,7 +56,7 @@ const LeftNavBar = ({ handleNavClick }) => {
                 {menu.map((obj) => (
                     <ListItem key={obj.text} disablePadding>
                         <NextLink href={obj.href} passHref>
-                            <ListItemButton component="a" onClick={handleNavClick(obj.text)}>
+                            <ListItemButton component="a">
                                 <ListItemIcon>{obj.icon}</ListItemIcon>
                                 <ListItemText primary={obj.text} />
                             </ListItemButton>

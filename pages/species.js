@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from "next/head";
 import SpeciesList from '../components/species/SpeciesList';
 
 export const getServerSideProps = async () => {
@@ -14,12 +13,7 @@ export const getServerSideProps = async () => {
 
 const Species = ({ data }) => {
     return (
-        <>
-            <Head>
-                <title>Species | Star Wars Dashboard</title>
-            </Head>
-            <SpeciesList data={data} />
-        </>
+        <SpeciesList data={data} />
     );
 };
 

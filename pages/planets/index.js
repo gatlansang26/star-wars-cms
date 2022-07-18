@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from "next/head";
 import PlanetList from '../../components/planets/PlanetList';
 
 export const getServerSideProps = async () => {
@@ -14,12 +13,7 @@ export const getServerSideProps = async () => {
 
 const Planets = ({ data }) => {
     return (
-        <>
-            <Head>
-                <title>Planets | Star Wars Dashboard</title>
-            </Head>
-            <PlanetList data={data} />
-        </>
+        <PlanetList data={data} />
     );
 };
 

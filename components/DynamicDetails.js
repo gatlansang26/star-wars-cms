@@ -9,16 +9,16 @@ const DynamicDetails = ({ data, details }) => {
         <Box sx={{ width: '100%' }}>
             <Paper sx={{ width: '45%', mb: 2 }}>
                 <List>
-                    {details.map(detail => {
+                    {details.map((detail, index) => {
                         if (detail.isTitle) {
                             return(
-                                <Typography variant="h5" sx={{ p: 2 }} noWrap component="div">
+                                <Typography key={index} variant="h5" sx={{ p: 2 }} noWrap component="div">
                                     {data.name}
                                 </Typography>
                             )
                         }
                         return (
-                            <ListItem key={detail.id}>
+                            <ListItem key={index}>
                                 <ListItemAvatar>
                                     <Avatar>{detail.icon}</Avatar>
                                 </ListItemAvatar>
