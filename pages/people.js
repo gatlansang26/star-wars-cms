@@ -1,17 +1,24 @@
 import React from 'react';
 import Head from "next/head";
+import PeopleList from '../components/people/PeopleList';
 
-const People = () => {
+export const getServerSideProps = async () => {
+    const URL = process.env.API_URL + process.env.PEOPLE_ENTITY;
+    const res = await fetch(URL);
+    const data = await res.json();
+
+    return {
+        props: {data: data}
+    }
+}
+
+const People = ({ data }) => {
     return (
         <>
             <Head>
                 <title>People | Star Wars Dashboard</title>
             </Head>
-            <div className="row">
-                <div className="col-md-12">
-                    <h4>People</h4>
-                </div>
-            </div>
+            <PeopleList data={data} />
         </>
     );
 };
