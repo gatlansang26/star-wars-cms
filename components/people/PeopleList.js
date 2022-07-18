@@ -1,44 +1,37 @@
 import React from 'react';
+import Link from 'next/link';
+import Button from '@mui/material/Button';
 import DynamicTable from '../DynamicTable';
 
 const PeopleList = ({ data }) => {
-    const headCells = [
+    const columns = [
+        { field: 'name', headerName: 'Name', flex: 1},
+        { field: 'height', headerName: 'Height',  flex: 1, disableColumnMenu: true, headerAlign: 'center', align: 'center'},
         {
-            id: 'name',
-            numeric: false,
-            disablePadding: false,
-            label: 'Name',
+            field: 'homeworld_id',
+            headerName: 'Homeworld',
+            flex: 1,
+            headerAlign: 'center',
+            align: 'center',
+            disableColumnMenu: true,
+            renderCell: (params) => {
+                if (params.value) {
+                    return (
+                        <Link href={`/planets/${params.value}`} passHref>
+                            <Button component="a" variant="text" color="inherit">
+                                {params.value}
+                            </Button>
+                        </Link>
+                    );
+                }
+            }
         },
-        {
-            id: 'height',
-            numeric: true,
-            disablePadding: false,
-            label: 'Height',
-        },
-        {
-            id: 'homeworld_id',
-            numeric: true,
-            disablePadding: false,
-            label: 'Homeworld',
-        },
-        {
-            id: 'gender',
-            numeric: false,
-            disablePadding: false,
-            label: 'Gender',
-        },
-        {
-            id: 'birth_year',
-            numeric: false,
-            disablePadding: false,
-            label: 'Birth Year',
-        },
+        { field: 'gender', headerName: 'Gender', flex: 1, disableColumnMenu: true, headerAlign: 'center', align: 'center'},
+        { field: 'birth_year', headerName: 'Birth Year', flex: 1, disableColumnMenu: true, headerAlign: 'center', align: 'center'},
     ];
 
     return (
-        <>
-            <DynamicTable rows={data.results} columns={headCells} />
-        </>
+        <DynamicTable rows={data.results} columns={columns} />
     );
 };
 

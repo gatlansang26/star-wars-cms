@@ -2,43 +2,16 @@ import React from 'react';
 import DynamicTable from '../DynamicTable';
 
 const PlanetList = ({ data }) => {
-    const headCells = [
-        {
-            id: 'name',
-            numeric: false,
-            disablePadding: false,
-            label: 'Name',
-        },
-        {
-            id: 'rotation_period',
-            numeric: true,
-            disablePadding: false,
-            label: 'Rotation Period',
-        },
-        {
-            id: 'orbital_period',
-            numeric: true,
-            disablePadding: false,
-            label: 'Orbital Period',
-        },
-        {
-            id: 'population',
-            numeric: false,
-            disablePadding: false,
-            label: 'Population',
-        },
-        {
-            id: 'gravity',
-            numeric: false,
-            disablePadding: false,
-            label: 'Gravity',
-        },
+    const columns = [
+        { field: 'name', headerName: 'Name', flex: 1},
+        { field: 'rotation_period', headerName: 'Rotation Period',  flex: 1, disableColumnMenu: true, headerAlign: 'center', align: 'center'},
+        { field: 'orbital_period', headerName: 'Orbital Period', flex: 1, disableColumnMenu: true, headerAlign: 'center', align: 'center'},
+        { field: 'population', headerName: 'Population', flex: 1, disableColumnMenu: true},
+        { field: 'gravity', headerName: 'Gravity', flex: 1, disableColumnMenu: true},
     ];
 
     return (
-        <>
-            <DynamicTable rows={data.results} columns={headCells} />
-        </>
+        <DynamicTable rows={data.results} columns={columns} />
     );
 };
 

@@ -10,12 +10,19 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import LeftNavBar from './LeftNavBar';
 import Head from 'next/head';
+import {useEffect} from 'react';
+import Router from 'next/router';
 
 const drawerWidth = 240;
 
 const Layout = ({ window , children}) => {
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const [contentTitle, setContentTitle] = React.useState('People');
+    const [contentTitle, setContentTitle] = React.useState(null);
+    let metaTitle = 'Star Wars Dashboard';
+    if (contentTitle) {
+        let newContentTitle = contentTitle.charAt(0).toUpperCase() + contentTitle.slice(1);
+        metaTitle = `${newContentTitle} | ${metaTitle}`;
+    }
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -23,14 +30,16 @@ const Layout = ({ window , children}) => {
 
     const container = window !== undefined ? () => window().document.body : undefined;
 
-    const handleNavClick = (title) => {
-        setContentTitle(title);
-    };
+    useEffect(() => {
+        const { pathname } = Router;
+        const arr = pathname.split('/');
+        setContentTitle(arr[1]); //gets entity name
+    });
 
     return (
         <>
             <Head>
-                <title>Stars Wars Dashboard</title>
+                <title>{metaTitle}</title>
                 <meta name="description" content="Star Wars Dashboard" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <link rel="icon" href="/favicon.ico" />
@@ -55,7 +64,7 @@ const Layout = ({ window , children}) => {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="h6" noWrap component="div">
+                        <Typography variant="h6" noWrap component="div" sx={{textTransform: 'capitalize'}}>
                             {contentTitle}
                         </Typography>
                     </Toolbar>
@@ -79,7 +88,7 @@ const Layout = ({ window , children}) => {
                             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
                         }}
                     >
-                        <LeftNavBar handleNavClick={handleNavClick} />
+                        <LeftNavBar />
                     </Drawer>
                     <Drawer
                         variant="permanent"
@@ -89,7 +98,7 @@ const Layout = ({ window , children}) => {
                         }}
                         open
                     >
-                        <LeftNavBar handleNavClick={handleNavClick} />
+                        <LeftNavBar />
                     </Drawer>
                 </Box>
                 <Box
