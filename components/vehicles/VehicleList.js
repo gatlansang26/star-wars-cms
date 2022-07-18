@@ -2,43 +2,16 @@ import React from 'react';
 import DynamicTable from '../DynamicTable';
 
 const VehicleList = ({ data }) => {
-    const headCells = [
-        {
-            id: 'name',
-            numeric: false,
-            disablePadding: false,
-            label: 'Name',
-        },
-        {
-            id: 'model',
-            numeric: true,
-            disablePadding: false,
-            label: 'Model',
-        },
-        {
-            id: 'manufacturer',
-            numeric: true,
-            disablePadding: false,
-            label: 'Manufacturer',
-        },
-        {
-            id: 'cargo_capacity',
-            numeric: false,
-            disablePadding: false,
-            label: 'Cargo Capacity',
-        },
-        {
-            id: 'vehicle_class',
-            numeric: false,
-            disablePadding: false,
-            label: 'Vehicle Class',
-        },
+    const columns = [
+        { field: 'name', headerName: 'Name', flex: 1},
+        { field: 'model', headerName: 'Model',  flex: 1, disableColumnMenu: true},
+        { field: 'manufacturer', headerName: 'Manufacturer', flex: 1, disableColumnMenu: true, },
+        { field: 'cargo_capacity', headerName: 'Cargo Capacity', flex: 1, disableColumnMenu: true, headerAlign: 'center', align: 'center'},
+        { field: 'vehicle_class', headerName: 'Vehicle Class', flex: 1, disableColumnMenu: true, headerAlign: 'center', align: 'center'},
     ];
 
     return (
-        <>
-            <DynamicTable rows={data.results} columns={headCells} />
-        </>
+        <DynamicTable rows={data.results} columns={columns} />
     );
 };
 

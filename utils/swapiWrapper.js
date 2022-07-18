@@ -27,25 +27,22 @@ const getAllData = entity => {
             //get the rest records - pages 2 through n.
             arr = response.reduce((acc, data) => [...acc, ...data.data.results], arr);
             arr = arr.map((item) => {
-                if (item.homeworld) {
-                    const url = item.homeworld.split('/');
-                    const id = url[url.length-2];
-
-                    return {
-                        ...item,
-                        'homeworld_id': id
-                    }
-                } else if (entity === 'planets') {
+                let id = null;
+                let homeworldId = null;
+                if (item.url) {
                     const url = item.url.split('/');
-                    const id = url[url.length-2];
-
-                    return {
-                        ...item,
-                        'id': id
-                    }
+                    id = url[url.length-2];
                 }
-                else {
-                    return item;
+
+                if (item.homeworld) {
+                    const homeworldUrl = item.homeworld.split('/');
+                    homeworldId = homeworldUrl[homeworldUrl.length-2];
+                }
+
+                return {
+                    ...item,
+                    'id': id ? id:null,
+                    'homeworld_id': homeworldId ? homeworldId:null
                 }
             })
 
