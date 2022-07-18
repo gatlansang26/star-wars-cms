@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from "next/head";
-import PlanetList from '../components/planets/PlanetList';
+import PlanetList from '../../components/planets/PlanetList';
 
 export const getServerSideProps = async () => {
     const URL = process.env.API_URL + process.env.PLANETS_ENTITY;
