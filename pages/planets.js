@@ -1,17 +1,24 @@
 import React from 'react';
 import Head from "next/head";
+import PlanetList from '../components/planets/PlanetList';
 
-const Planets = () => {
+export const getServerSideProps = async () => {
+    const URL = process.env.API_URL + process.env.PLANETS_ENTITY;
+    const res = await fetch(URL);
+    const data = await res.json();
+
+    return {
+        props: {data: data}
+    }
+}
+
+const Planets = ({ data }) => {
     return (
         <>
             <Head>
                 <title>Planets | Star Wars Dashboard</title>
             </Head>
-            <div className="row">
-                <div className="col-md-12">
-                    <h4>Planets</h4>
-                </div>
-            </div>
+            <PlanetList data={data} />
         </>
     );
 };
