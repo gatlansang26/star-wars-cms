@@ -17,7 +17,7 @@ const drawerWidth = 240;
 
 const Layout = ({ window , children}) => {
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const [contentTitle, setContentTitle] = React.useState(false);
+    const [contentTitle, setContentTitle] = React.useState(null);
     let metaTitle = 'Star Wars Dashboard';
     if (contentTitle) {
         let newContentTitle = contentTitle.charAt(0).toUpperCase() + contentTitle.slice(1);
@@ -34,7 +34,7 @@ const Layout = ({ window , children}) => {
         const { pathname } = Router;
         const arr = pathname.split('/');
         setContentTitle(arr[1]); //gets entity name
-    },[]);
+    });
 
     return (
         <>
