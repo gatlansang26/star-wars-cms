@@ -21,6 +21,8 @@ import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
+import NextLink from 'next/link';
+import Button from '@mui/material/Button';
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -163,14 +165,13 @@ EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
 };
 
-export default function DynamicTable({ rows, pageCount, columns }) {
+export default function DynamicTable({ rows, columns }) {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-    const rowsPerPageOptions = [10, 20, 30];
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -265,6 +266,18 @@ export default function DynamicTable({ rows, pageCount, columns }) {
                                             // selected={isItemSelected}
                                         >
                                             {columns.map((column, index) => {
+                                                if (column.id === 'homeworld_id' && row[column.id]) {
+                                                    const homeworldURL = `/planets/${row[column.id]}`;
+                                                    return (
+                                                        <TableCell key={column.id} passHref>
+                                                            <NextLink href={homeworldURL}>
+                                                                <Button component="a" variant="text" color="inherit">
+                                                                    {row[column.id]}
+                                                                </Button>
+                                                            </NextLink>
+                                                        </TableCell>
+                                                    );
+                                                }
                                                 return (<TableCell key={column.id}>{row[column.id]}</TableCell>);
                                             })}
                                             {/*<TableCell padding="checkbox">*/}

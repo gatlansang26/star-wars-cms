@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const getAllData = (entity) => {
+const getAllData = entity => {
     const ENTITY_URL = process.env.SWAPI_URL + entity;
     let arr = [];
 
@@ -35,7 +35,16 @@ const getAllData = (entity) => {
                         ...item,
                         'homeworld_id': id
                     }
-                } else {
+                } else if (entity === 'planets') {
+                    const url = item.url.split('/');
+                    const id = url[url.length-2];
+
+                    return {
+                        ...item,
+                        'id': id
+                    }
+                }
+                else {
                     return item;
                 }
             })
@@ -45,4 +54,14 @@ const getAllData = (entity) => {
         .catch(error => console.log("Properly handle your exception here"));
 }
 
-export { getAllData };
+const getData = (entity, id) => {
+    const ENTITY_URL = `${process.env.SWAPI_URL + entity}/${id}`;
+
+    return axios(ENTITY_URL)
+        .then(response => {
+           return response.data;
+        })
+        .catch(error => console.log("Properly handle your exception here"));
+}
+
+export { getAllData, getData };
